@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/icons/font/bootstrap-icons.min.css' %}">
+    <title>ToolConverter</title>
+</head>
+<body style="background-color: #f1f1f1;">
+    <header>
+      <nav class="navbar navbar-expand-lg bg-danger shadow-sm">
+        <div class="container-fluid">
+          <span class="navbar-brand bg-light px-2 rounded-2 text-danger " href="#">ToolConverter</span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav"> 
+              <a class="nav-link" href="{% url 'home' %}" style="color: white;">Home</a>
+              <a class="nav-link"><button type="button" class="btn text-light nav-link p-0" style="color: white;" data-bs-toggle="modal" data-bs-target="#exampleModal">Contacto</button></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form action="{% url 'contact' %}" method="post">{% csrf_token %}
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Contactanos</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <input class="form-control bg-body-secondary my-2" type="text" name="nombre" placeholder="Nombre">
+                  <input class="form-control bg-body-secondary my-2" type="email" name="email" placeholder="Email">
+                  <input class="form-control bg-body-secondary my-2" type="text" name="asunto" placeholder="Asunto">
+                  <textarea class="form-control bg-body-secondary my-2" name="mensaje" placeholder="Mensaje" rows="10"></textarea>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="submit" class="btn btn-danger">Enviar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+        {% block content %}
+            
+        {% endblock %}
+    </main>
+
+<script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

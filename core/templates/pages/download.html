@@ -1,0 +1,76 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="container-fluid d-flex justify-content-center py-3">
+        <div class="container p-2 m-0 border rounded shadow-sm" style="background-color: white;">
+            <div class="row p-0 m-0">
+
+                <div class="col-lg-4"> 
+                    {{iframe|safe}}
+                </div>
+                
+                <div class="col-lg-8">
+                    <div class="row p-0 m-0 border-bottom">
+                        <span class="text-center">{{title}}</span>
+                    </div>
+                    <div class="row p-0 m-0">
+                        <div class="col">
+                            <h4 class="text-center">Audio</h4>
+                            <table class="table table-bordered shadow-sm text-center table-responsive">
+                                <thead class="table-light">
+                                    <tr>
+                                        <td class="text-secondary">Formato</td>
+                                        <td class="text-secondary">Calidad</td>
+                                        <td class="text-secondary">Download</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for quality in qualityAudio %}
+                                <tr>
+                                    <td>MP3</td>
+                                    <td>{{quality}}</td>
+                                    <td><form action="{% url 'download' %}" method="post">{% csrf_token %}
+                                        <button type="submit" class="btn btn-danger "><i class="bi bi-download"></i></button>
+                                        <input type="hidden" name="getUrl" value="{{url}}">
+                                        <input type="hidden" name="getQuality" value="{{forloop.counter0}}">
+                                        <input type="hidden" name="getFormat" value="mp3">
+                                    </form></td>
+                                </tr>         
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col">
+                            <h4 class="text-center">Video</h4>
+                            <table class="table table-bordered shadow-sm text-center table-responsive">
+                                <thead class="table-light">
+                                    <tr>
+                                        <td class="text-secondary">Formato</td>
+                                        <td class="text-secondary">Calidad</td>
+                                        <td class="text-secondary">Download</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for quality in qualityVideo %}
+                                    <tr>
+                                        <td>MP4</td>
+                                        <td>{{quality}}</td>
+                                        <td><form action="{% url 'download' %}" method="post">{% csrf_token %}
+                                            <button type="submit" class="btn btn-danger "><i class="bi bi-download"></i></button>
+                                            <input type="hidden" name="getUrl" value="{{url}}">
+                                            <input type="hidden" name="getQuality" value="{{forloop.counter0}}">
+                                            <input type="hidden" name="getFormat" value="mp4">
+                                        </form></td>
+                                    </tr>        
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+</div>
+{% endblock %}

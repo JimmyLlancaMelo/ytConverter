@@ -1,0 +1,31 @@
+{% extends 'pages/base.html' %}
+
+{% block content %}
+
+<div class="container-fluid py-5">
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="container border shadow-sm bg-light" style="padding: 80px 20px 80px 20px;">
+        <div class="row">
+            <h2 class="text-center">Convierte tus videos de youtube a Audio y Video</h2>
+            <p class="text-center" style="color: #bbbbbb;">Descarga videos de YouTube de forma gratuita en formatos MP3 y MP4 con nuestra plataforma. Simplemente ingresa la URL del video y obtén tu archivo en alta calidad al instante. Disfruta de tu contenido favorito sin conexión, respetando siempre los derechos de autor.</p>
+        </div>
+        <div class="row">
+            <div class="container mb-5">
+                <form class="d-flex gap-1 flex-row border rounded border-0 bg-danger p-1" action="" method="post"> {% csrf_token %}
+                    <input class="form-control border-0" type="text" name="urlVideo">
+                    <button class="btn btn-danger" type="submit">Convertir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
